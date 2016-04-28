@@ -67,5 +67,35 @@ public class CheckoutServiceTest {
 		double billAmount = CheckoutService.checkout(shoppingCart);
 		Assert.assertEquals(1.25, billAmount,0.0);
 	}
+	
+	@Test
+	public void testCheckoutWithFiveApplesWithOffer() {
+		System.out.println("Running testCheckoutWithFiveApplesWithOffer");
+		shoppingCart.clearCart();
+		Product apple = ProductFactory.getProduct(ProductType.APPLE, 0.6, new OfferService().applyTwoForOneOffer );
+		shoppingCart.addProductToCart(apple);
+		shoppingCart.addProductToCart(apple);
+		shoppingCart.addProductToCart(apple);
+		shoppingCart.addProductToCart(apple);
+		shoppingCart.addProductToCart(apple);
+		
+		double billAmount = CheckoutService.checkout(shoppingCart);
+		Assert.assertEquals(1.8, billAmount,0.0);
+	}
+	
+	@Test
+	public void testCheckoutWithFiveOrangesWithOffer() {
+		System.out.println("Running testCheckoutWithFiveOranges");
+		shoppingCart.clearCart();
+		Product orange = ProductFactory.getProduct(ProductType.ORANGE, 0.25, new OfferService().applyThreeForTwoOffer );
+		shoppingCart.addProductToCart(orange);
+		shoppingCart.addProductToCart(orange);
+		shoppingCart.addProductToCart(orange);
+		shoppingCart.addProductToCart(orange);
+		shoppingCart.addProductToCart(orange);
+		
+		double billAmount = CheckoutService.checkout(shoppingCart);
+		Assert.assertEquals(1.0, billAmount,0.0);
+	}
 
 }
